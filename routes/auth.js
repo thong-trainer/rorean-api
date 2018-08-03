@@ -25,8 +25,12 @@ router.route('/register').post(UserController.register);
 NOTE POST EXAMPLE
 =====================================
 {
+	"englishName": {
+		"firstName": "Ley",
+		"lastName": "Kamthong"
+	},
 	"username": "ley_kamthong",
-  "gender": "Male",
+    "gender": "Male",
 	"telephone": "855-069665533",
 	"password": "12345"
 }

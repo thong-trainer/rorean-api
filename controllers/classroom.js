@@ -128,63 +128,6 @@ module.exports = {
     res.send(classrooms);
   },
 
-  // get a record by id
-  getById: async (req, res, next) => {
-
-    const id = mongoose.Types.ObjectId(req.params.id);
-
-    const classrooms = await Classroom.aggregate([
-       {
-         // join here
-         $lookup:
-           {
-             from: "subjects", // join collection
-             localField: "subjectId", // primary key
-             foreignField: "_id", // foreign key
-             as: "subject" // new name alias
-           }
-      },
-      {
-        $unwind: "$subject"
-      },
-      {
-        // join here
-        $lookup:
-          {
-            from: "teachers", // join collection
-            localField: "teachBy", // primary key
-            foreignField: "_id", // foreign key
-            as: "teacher" // new name alias
-          }
-      },
-      {
-        $unwind: "$teacher"
-      },
-      {
-        // join here
-        $lookup:
-          {
-            from: "rooms", // join collection
-            localField: "roomId", // primary key
-            foreignField: "_id", // foreign key
-            as: "room" // new name alias
-          }
-      },
-      {
-        $unwind: "$room"
-      },
-      // set condition here
-      { $match: { _id: id } },
-      { $sort: { createdAt: -1 } },
-
-      //select or unselect fields here
-      { $project : { "teacher.createdBy": 0, "teacher.createdAt": 0, "teacher.updatedAt": 0 } }
-    ]);
-
-    res.send(classrooms[0]);
-  },
-
-
   // insert a new record
   create: async (req, res, next) => {
     const newClassroom = Classroom(req.body);

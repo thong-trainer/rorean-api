@@ -13,9 +13,15 @@ Example: /api/v1/classroom/5b485c868749b10c0f0edaa1/0/10?access_token=123456789
 */
 router.route('/:schoolId/:index/:limit').get(ClassroomController.index);
 
+/*
+NOTE: GET LIST OF RECORDS
+Url: /api/v1/classroom/<p_school_id>/<p_id>?access_token=<token>
+Paramas: p_school_id AS String, p_id as Number (student id or teacher id)
+Token: required
+Method: GET
+Example: /api/v1/classroom/5b485c868749b10c0f0edaa1/5b4d550227138d2168d09c00?access_token=123456789
+*/
 router.route('/:schoolId/:id').get(ClassroomController.getList);
-
-router.route('/:id').get(ClassroomController.getById);
 
 /*
 NOTE: UPDATE BY ID

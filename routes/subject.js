@@ -109,7 +109,7 @@ NOTE POST SUBJECT EXAMPLE
 	"price": 59,
 	"description": "This course is for students of the Faculty of Computer Science, Computer Science or Computer Engineering Year 1 or 2 and want to take the Programming skills.",
 	"requirement": "can use some internet and e-mail",
-	"lessions": [
+	"lessons": [
 		{
 			"name": "Introduction",
 			"documentUrl": "https://www.tutorialspoint.com/cprogramming/index.htm"
