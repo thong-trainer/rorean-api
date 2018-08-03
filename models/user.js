@@ -6,14 +6,8 @@ const bcrypt = require('bcrypt');
 // create User Schema & Model
 const UserSchema = new Schema({
   khmerName: {
-    firstName: {
-      type: String,
-      required: [true, 'First Name (Khmer) field is required']
-    },
-    lastName: {
-      type: String,
-      required: [true, 'Last Name (Khmer) field is required']
-    }
+    firstName: String,
+    lastName: String
   },
   englishName: {
     firstName: {
@@ -24,7 +18,7 @@ const UserSchema = new Schema({
       type: String,
       required: [true, 'Last Name (English) field is required']
     }
-  },  
+  },
   username: {
     type: String,
     required: [true, 'Username field is required']
