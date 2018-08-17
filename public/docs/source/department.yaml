@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: >-
-    This is a sample server Petstore server.  You can find out more about    
+    This is a sample server Petstore server.  You can find out more about
     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,
     #swagger](http://swagger.io/irc/).      For this sample, you can use the api
     key `special-key` to test the authorization     filters.
@@ -117,7 +117,7 @@ paths:
         '404':
           description: Not found
         '500':
-          description: Internal server error     
+          description: Internal server error
   /department/desactive/{id}:
     delete:
       tags:
@@ -144,12 +144,12 @@ paths:
         '404':
           description: Not found
         '500':
-          description: Internal server error  
+          description: Internal server error
   /department/active/{id}:
     put:
       tags:
         - department
-      summary: Updated department
+      summary: Actived department
       description: ''
       operationId: activeUser
       produces:
@@ -162,7 +162,7 @@ paths:
           type: string
         - name: id
           in: path
-          description: The department id that need to be updated
+          description: The department id that need to be actived
           required: true
           type: string
       responses:
@@ -171,13 +171,14 @@ paths:
         '404':
           description: Not found
         '500':
-          description: Internal server error    
+          description: Internal server error
 definitions:
   Department:
     type: object
     required:
       - name
       - schoolId
+      - createdBy
     properties:
       _id:
         type: string
@@ -186,6 +187,8 @@ definitions:
       description:
         type: string
       schoolId:
+        type: string
+      createdBy:
         type: string
       active:
         type: boolean

@@ -34,8 +34,8 @@
     }
   ],
   "schemes": [
-    "https",
-    "http"
+    "http",
+    "https"
   ],
   "paths": {
     "/auth/login": {
@@ -63,7 +63,19 @@
             "description": "Created user object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "object",
+              "properties": {
+                "telephone": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "telephone": "855-069665533",
+                "password": "12345"
+              }
             }
           }
         ],
@@ -91,8 +103,8 @@
         "tags": [
           "auth"
         ],
-        "summary": "Logs out current logged in user session",
-        "description": "",
+        "summary": "Logs out current logged in user session (Not working...)",
+        "description": "not yet implement",
         "operationId": "logoutUser",
         "produces": [
           "application/json"
@@ -117,6 +129,13 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
           {
             "in": "body",
             "name": "body",
@@ -212,7 +231,7 @@
           "user"
         ],
         "summary": "Updated user",
-        "description": "This can only be done by the logged in user.",
+        "description": "",
         "operationId": "updateUser",
         "produces": [
           "application/json"
@@ -250,17 +269,22 @@
             "description": "Invalid user supplied"
           },
           "404": {
-            "description": "User not found"
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
-      },
+      }
+    },
+    "/user/desactive/{id}": {
       "delete": {
         "tags": [
           "user"
         ],
-        "summary": "Delete user",
-        "description": "This can only be done by the logged in user.",
-        "operationId": "deleteUser",
+        "summary": "Desactive user",
+        "description": "",
+        "operationId": "desactiveUser",
         "produces": [
           "application/json"
         ],
@@ -273,9 +297,9 @@
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "id",
             "in": "path",
-            "description": "The id that needs to be deleted",
+            "description": "The user id that needs to be desactive",
             "required": true,
             "type": "string"
           }
@@ -284,11 +308,51 @@
           "200": {
             "description": "Successful operation"
           },
-          "400": {
-            "description": "Invalid username supplied"
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/active/{id}": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Actived user",
+        "description": "",
+        "operationId": "activeUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The user id that need to be actived",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
           },
           "404": {
-            "description": "User not found"
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }

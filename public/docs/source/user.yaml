@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: >-
-    This is a sample server Petstore server.  You can find out more about    
+    This is a sample server Petstore server.  You can find out more about
     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,
     #swagger](http://swagger.io/irc/).      For this sample, you can use the api
     key `special-key` to test the authorization     filters.
@@ -27,8 +27,8 @@ tags:
       description: Find out more about our store
       url: 'http://swagger.io'
 schemes:
-  - https
   - http
+  - https
 paths:
   /auth/login:
     put:
@@ -50,7 +50,15 @@ paths:
           description: Created user object
           required: true
           schema:
-            $ref: '#/definitions/User'
+            type: object
+            properties:
+              telephone:
+                type: string
+              password:
+                type: string
+            example:   # Sample object
+              telephone: "855-069665533"
+              password: "12345"
       responses:
         '200':
           description: Successful operation
@@ -66,8 +74,8 @@ paths:
     get:
       tags:
         - auth
-      summary: Logs out current logged in user session
-      description: ''
+      summary: Logs out current logged in user session (Not working...)
+      description: 'not yet implement'
       operationId: logoutUser
       produces:
         - application/json
@@ -85,6 +93,11 @@ paths:
       produces:
         - application/json
       parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
         - in: body
           name: body
           description: Created user object
@@ -149,7 +162,7 @@ paths:
       tags:
         - user
       summary: Updated user
-      description: This can only be done by the logged in user.
+      description: ""
       operationId: updateUser
       produces:
         - application/json
@@ -176,13 +189,16 @@ paths:
         '400':
           description: Invalid user supplied
         '404':
-          description: User not found
+          description: Not found
+        '500':
+          description: Internal server error
+  /user/desactive/{id}:
     delete:
       tags:
         - user
-      summary: Delete user
-      description: This can only be done by the logged in user.
-      operationId: deleteUser
+      summary: Desactive user
+      description: ''
+      operationId: desactiveUser
       produces:
         - application/json
       parameters:
@@ -191,18 +207,45 @@ paths:
           description: The token is required.
           required: true
           type: string
-        - name: userId
+        - name: id
           in: path
-          description: The id that needs to be deleted
+          description: The user id that needs to be desactive
           required: true
           type: string
       responses:
         '200':
           description: Successful operation
-        '400':
-          description: Invalid username supplied
         '404':
-          description: User not found
+          description: Not found
+        '500':
+          description: Internal server error
+  /user/active/{id}:
+    put:
+      tags:
+        - user
+      summary: Actived user
+      description: ''
+      operationId: activeUser
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: The user id that need to be actived
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error
 securityDefinitions:
   petstore_auth:
     type: oauth2
