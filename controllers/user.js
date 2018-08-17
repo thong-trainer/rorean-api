@@ -120,5 +120,34 @@ module.exports = {
         message: process.env.TELEPHONE_NOT_EXISTS, success: false
       });
     }
+  },
+  // update information
+  update: async (req, res, next) => {
+    const user = await User.findByIdAndUpdate({_id: req.params.id}, req.body);
+    if(user) {
+      // retreive a document by id
+      User.findById(req.params.id).then(function(data){
+         res.send(data);
+      });
+    } else {
+      res.status(500).json({
+       message: process.env.NOT_FOUNT, success: false
+      });
+    }
+  },
+  // desactive
+  desactive: async (req, res, next) => {
+    const user = await User.findOne({_id: req.params.id});
+    user.active = false;
+    const result = await user.save();
+    res.send(result);
+  },
+
+  // active
+  active: async (req, res, next) => {
+    const user = await User.findOne({_id: req.params.id});
+    user.active = true;
+    const result = await user.save();
+    res.send(result);
   }
 };
