@@ -1,0 +1,201 @@
+swagger: '2.0'
+info:
+  description: >-
+    This is a sample server Petstore server.  You can find out more about    
+    Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,
+    #swagger](http://swagger.io/irc/).      For this sample, you can use the api
+    key `special-key` to test the authorization     filters.
+  version: 1.0.0
+  title: Rorean Developer API
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: leykamthong@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: '128.199.88.174:3333'
+basePath: /api/v1
+tags:
+  - name: room
+    description: Operations about room
+    externalDocs:
+      description: Find out more about our store
+      url: 'http://swagger.io'
+schemes:
+  - https
+  - http
+paths:
+  '/room':
+    post:
+      tags:
+        - room
+      summary: Create room
+      description: ''
+      operationId: createRoom
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - in: "body"
+          name: "body"
+          description: "Created room object"
+          required: true
+          schema:
+            $ref: "#/definitions/Room"
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Room'
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error
+  '/room/{id}':
+    get:
+      tags:
+        - room
+      summary: Get room by school id
+      description: ''
+      operationId: getUserByStatus
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: The school id that needs to filter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Room'
+        '400':
+          description: Incorrect information
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error
+    put:
+      tags:
+        - room
+      summary: Update room
+      description: ''
+      operationId: updateRoom
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: The room id that need to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Updated room object
+          required: true
+          schema:
+            $ref: '#/definitions/Room'
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error     
+  /room/desactive/{id}:
+    delete:
+      tags:
+        - room
+      summary: Desactive room
+      description: ''
+      operationId: desactiveUser
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: The room id that needs to be desactive
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error  
+  /room/active/{id}:
+    put:
+      tags:
+        - room
+      summary: Updated room
+      description: ''
+      operationId: activeUser
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: The room id that need to be updated
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error    
+definitions:
+  Room:
+    type: object
+    required:
+      - name
+      - schoolId
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      schoolId:
+        type: string
+      active:
+        type: boolean
+        default: true
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

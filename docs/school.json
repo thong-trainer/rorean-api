@@ -1,0 +1,741 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": "1.0.0",
+    "title": "Rorean Developer API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "leykamthong@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "128.199.88.174:3333",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "school",
+      "description": "Operations about school",
+      "externalDocs": {
+        "description": "Find out more about us",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "permission",
+      "description": "Operations about school permission",
+      "externalDocs": {
+        "description": "Find out more about us",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/school/register": {
+      "post": {
+        "tags": [
+          "school"
+        ],
+        "summary": "Create school",
+        "description": "",
+        "operationId": "createSchool",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created school object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/School"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/School"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/school/{index}/{limit}": {
+      "get": {
+        "tags": [
+          "school"
+        ],
+        "summary": "Get list of schools",
+        "description": "",
+        "operationId": "getSchools",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "description": "The index that needs to be pagination",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "description": "The limit that needs to a limited number of records",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/School"
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect information"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/school/{id}": {
+      "get": {
+        "tags": [
+          "school"
+        ],
+        "summary": "Get school by id",
+        "description": "",
+        "operationId": "getSchoolById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The school id that needs to be retrieved",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/School"
+            }
+          },
+          "400": {
+            "description": "Incorrect information"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "school"
+        ],
+        "summary": "Update school",
+        "description": "",
+        "operationId": "updateSchool",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The school id that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated school object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/School"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/school/desactive/{id}": {
+      "delete": {
+        "tags": [
+          "school"
+        ],
+        "summary": "Desactive school",
+        "description": "",
+        "operationId": "desactiveSchool",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The school id that needs to be desactive",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/school/active/{id}": {
+      "put": {
+        "tags": [
+          "school"
+        ],
+        "summary": "Actived school",
+        "description": "",
+        "operationId": "activeSchool",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The school id that need to be active",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/permission": {
+      "post": {
+        "tags": [
+          "permission"
+        ],
+        "summary": "Create permission",
+        "description": "",
+        "operationId": "createPermission",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created permission object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Permission"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Permission"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/permission/user/{id}": {
+      "get": {
+        "tags": [
+          "permission"
+        ],
+        "summary": "Get permission by user id",
+        "description": "",
+        "operationId": "getPermissionByUserId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The user id that needs to be retrieved",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Permission"
+            }
+          },
+          "400": {
+            "description": "Incorrect information"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/permission/{id}": {
+      "get": {
+        "tags": [
+          "permission"
+        ],
+        "summary": "Get list of permissions by school id",
+        "description": "",
+        "operationId": "getPermissionsBySchoolId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The school id that needs to be retrieved",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Permission"
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect information"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "permission"
+        ],
+        "summary": "Update permission",
+        "description": "",
+        "operationId": "updatePermission",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The permission id that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated permission object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Permission"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/permission/desactive/{id}": {
+      "delete": {
+        "tags": [
+          "permission"
+        ],
+        "summary": "Desactive permission",
+        "description": "",
+        "operationId": "desactivePermission",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The permission id that needs to be desactive",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/permission/active/{id}": {
+      "put": {
+        "tags": [
+          "permission"
+        ],
+        "summary": "Actived permission",
+        "description": "",
+        "operationId": "activePermission",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The permission id that need to be active",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "School": {
+      "type": "object",
+      "required": [
+        "schoolName",
+        "category",
+        "createdBy"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "auto generated"
+        },
+        "schoolName": {
+          "type": "string",
+          "description": "index: true"
+        },
+        "category": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "object",
+          "properties": {
+            "office": {
+              "type": "string"
+            },
+            "support": {
+              "type": "string"
+            },
+            "mobile": {
+              "type": "string"
+            }
+          }
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "zipCode": {
+              "type": "integer"
+            },
+            "address": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            }
+          }
+        },
+        "socialIds": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "zipCode": {
+                "type": "integer"
+              },
+              "address": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "profileUrl": {
+              "type": "string"
+            },
+            "coverUrl": {
+              "type": "string"
+            }
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "reference to user id"
+        },
+        "active": {
+          "type": "boolean",
+          "default": true,
+          "description": "index: true"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "auto generated"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "auto generated"
+        }
+      }
+    },
+    "Permission": {
+      "type": "object",
+      "required": [
+        "userId",
+        "schoolId",
+        "role",
+        "createdBy"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "auto generated"
+        },
+        "userId": {
+          "type": "string",
+          "description": "reference to user id"
+        },
+        "schoolId": {
+          "type": "string",
+          "description": "reference to school id"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "admin",
+            "editor",
+            "viewer"
+          ]
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "reference to user id"
+        },
+        "active": {
+          "type": "boolean",
+          "default": true,
+          "description": "index: true"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "auto generated"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "auto generated"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

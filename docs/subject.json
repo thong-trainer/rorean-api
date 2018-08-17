@@ -1,0 +1,569 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": "1.0.0",
+    "title": "Rorean Developer API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "leykamthong@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "128.199.88.174:3333",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "subject",
+      "description": "Operations about subject",
+      "externalDocs": {
+        "description": "Find out more about us",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/subject": {
+      "post": {
+        "tags": [
+          "subject"
+        ],
+        "summary": "Create subject",
+        "description": "",
+        "operationId": "createSubject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created subject object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Subject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Subject"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/subject/{schoolId}/{index}/{limit}": {
+      "get": {
+        "tags": [
+          "subject"
+        ],
+        "summary": "Get list of subjects",
+        "description": "",
+        "operationId": "getSubjects",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "schoolId",
+            "in": "path",
+            "description": "The school id that needs to be filter",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "description": "The index that needs to be pagination",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "description": "The limit that needs to a limited number of records",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Subject"
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect information"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/subject/{id}": {
+      "get": {
+        "tags": [
+          "subject"
+        ],
+        "summary": "Get subject by id",
+        "description": "",
+        "operationId": "getSubjectById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The subject id that needs to be retrieved",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Subject"
+            }
+          },
+          "400": {
+            "description": "Incorrect information"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "subject"
+        ],
+        "summary": "Update subject",
+        "description": "",
+        "operationId": "updateSubject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The subject id that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated subject object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Subject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/subject/desactive/{id}": {
+      "delete": {
+        "tags": [
+          "subject"
+        ],
+        "summary": "Desactive subject",
+        "description": "",
+        "operationId": "desactiveSubject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The subject id that needs to be desactive",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/subject/active/{id}": {
+      "put": {
+        "tags": [
+          "subject"
+        ],
+        "summary": "Actived subject",
+        "description": "",
+        "operationId": "activeSubject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The subject id that needs to be active",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/subject/{subjectId}/lesson": {
+      "post": {
+        "tags": [
+          "subject"
+        ],
+        "summary": "Add lesson",
+        "description": "",
+        "operationId": "addLesson",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "The subject id that needs to be parent",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created lesson object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Lesson"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Lesson"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "subject"
+        ],
+        "summary": "Update lesson",
+        "description": "",
+        "operationId": "updateLesson",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "The subject id that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated lesson object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Lesson"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/subject/{subjectId}/lesson/{lessonId}": {
+      "delete": {
+        "tags": [
+          "subject"
+        ],
+        "summary": "Delete lesson",
+        "description": "",
+        "operationId": "deleteLesson",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "The token is required.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "The subject id that needs to be parent",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lessonId",
+            "in": "path",
+            "description": "The lesson id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Lesson"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Subject": {
+      "type": "object",
+      "required": [
+        "title",
+        "price",
+        "duration",
+        "levelId",
+        "departmentId",
+        "schoolId",
+        "createdBy"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "auto generated"
+        },
+        "title": {
+          "type": "string",
+          "description": "index: true"
+        },
+        "price": {
+          "type": "integer"
+        },
+        "duration": {
+          "type": "integer"
+        },
+        "subtitle1": {
+          "type": "string"
+        },
+        "subtitle2": {
+          "type": "string"
+        },
+        "requirement": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string",
+          "default": "image_placeholder"
+        },
+        "levelId": {
+          "type": "string",
+          "description": "reference to level id"
+        },
+        "departmentId": {
+          "type": "string",
+          "description": "reference to department id"
+        },
+        "schoolId": {
+          "type": "string",
+          "description": "reference to school id"
+        },
+        "lessons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Lesson"
+          }
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "reference to user id"
+        },
+        "active": {
+          "type": "boolean",
+          "default": true,
+          "description": "index: true"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "auto generated"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "auto generated"
+        }
+      }
+    },
+    "Lesson": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "auto generated"
+        },
+        "name": {
+          "type": "string"
+        },
+        "documentUrl": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

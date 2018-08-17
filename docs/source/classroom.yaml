@@ -1,0 +1,296 @@
+swagger: '2.0'
+info:
+  description: >-
+    This is a sample server Petstore server.  You can find out more about    
+    Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,
+    #swagger](http://swagger.io/irc/).      For this sample, you can use the api
+    key `special-key` to test the authorization     filters.
+  version: 1.0.0
+  title: Rorean Developer API
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: leykamthong@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: '128.199.88.174:3333'
+basePath: /api/v1
+tags:
+  - name: classroom
+    description: Operations about classroom
+    externalDocs:
+      description: Find out more about us
+      url: 'http://swagger.io'           
+schemes:
+  - http
+  - https
+paths:
+  
+  '/classroom':
+    post:
+      tags:
+        - classroom
+      summary: Create classroom
+      description: ''
+      operationId: createClassroom
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Created classroom object
+          required: true
+          schema:
+            $ref: '#/definitions/Classroom'
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Classroom'
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error     
+  '/classroom/{schoolId}/{index}/{limit}':
+    get:
+      tags:
+        - classroom
+      summary: Get list of classrooms
+      description: ''
+      operationId: getClassrooms
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - name: schoolId
+          in: path
+          description: The school id that needs to be filter
+          required: true
+          type: string          
+        - name: index
+          in: path
+          description: The index that needs to be pagination
+          required: true
+          type: string
+        - name: limit
+          in: path
+          description: The limit that needs to a limited number of records
+          required: true
+          type: string          
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Classroom'
+        '400':
+          description: Incorrect information
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error     
+  '/classroom/{schoolId}/{id}':
+    get:
+      tags:
+        - classroom
+      summary: Get list of classrooms by school id and (student id or teacher id)
+      description: ''
+      operationId: getClassroomsList
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - name: schoolId
+          in: path
+          description: The school id that needs to be filter
+          required: true
+          type: string          
+        - name: id
+          in: path
+          description: The (student id or teacher id) that needs to be retrieved
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Classroom'
+        '400':
+          description: Incorrect information
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error   
+  '/classroom/{id}':          
+    put:
+      tags:
+        - classroom
+      summary: Update classroom
+      description: ''
+      operationId: updateClassroom
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: The classroom id that need to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Updated classroom object
+          required: true
+          schema:
+            $ref: '#/definitions/Classroom'
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error             
+  '/classroom/desactive/{id}':
+    delete:
+      tags:
+        - classroom
+      summary: Desactive classroom
+      description: ''
+      operationId: desactiveClassroom
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: The classroom id that needs to be desactive
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error        
+  '/classroom/active/{id}':
+    put:
+      tags:
+        - classroom
+      summary: Actived classroom
+      description: ''
+      operationId: activeClassroom
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          description: The token is required.
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: The classroom id that needs to be active
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error     
+definitions:
+  Classroom:
+    type: object
+    required:
+      - schedule
+      - startHour
+      - endHour
+      - subjectId
+      - teachBy
+      - schoolId
+      - roomId  
+      - status
+      - createdBy        
+    properties:
+      _id:
+        type: string
+        description: 'auto generated'    
+      name:
+        type: string
+      schedule:
+        type: string        
+      startHour:
+        type: string        
+      endHour:
+        type: string       
+      subjectId:
+        type: string       
+        description: 'reference to subject id'      
+      teachBy:
+        type: string       
+        description: 'reference to teacher id'      
+      roomId:
+        type: string       
+        description: 'reference to room id'      
+      schoolId:
+        type: string       
+        description: 'reference to school id'            
+      students:
+        type: array
+        items:
+          type: string
+      status:
+        type: string
+        enum:
+        - opening
+        - started
+        - achived
+      description:
+        type: string   
+      startedDate:
+        type: string
+        format: date-time
+      createdBy:
+        type: string       
+        description: 'reference to user id'        
+      active:
+        type: boolean
+        default: true
+        description: 'index: true'
+      createdAt:
+        type: string
+        format: date-time
+        description: 'auto generated'
+      updatedAt:
+        type: string
+        format: date-time
+        description: 'auto generated'             
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
