@@ -66,6 +66,8 @@ app.use('/api/v1/classroom', require('./routes/classroom'));
 app.use('/api/v1/room', require('./routes/room'));
 app.use('/api/v1/post', require('./routes/post'));
 app.use('/api/v1/comment', require('./routes/comment'));
+
+
 app.get('/', function(req, res, next){
 	res.send("Welcome");
 });
